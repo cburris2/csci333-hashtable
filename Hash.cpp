@@ -11,11 +11,10 @@ using std::endl;
 
 
 template <typename T>
-Hash<T>::Hash(string key,T v ){
+Hash<T>::Hash(T v ){
 
-	  k = key;
 	  value = v;
-	  hashTable = new vector<Entry<T>*>[349];
+	  hashTable = new vector<Entry<T>* >[349];
 
 }
 
@@ -24,12 +23,8 @@ T Hash<T>::find(string k){
     
     int x = 0;
     x = hashFunction(k);
-    vector<Entry<T>*> valueToFind = hashTable[x];
+    vector<Entry<T>* > valueToFind = hashTable[x];
     
-    if (valueToFind.empty()){
-
-	  return value;	  
-     }
      
 	  while(!valueToFind.empty()){
 		if(valueToFind.back()->getKey() == k){
@@ -50,6 +45,7 @@ void Hash<T>::insert(string k, T v){
    int x = 0;
 
    x = hashFunction(k);
+
    if(hashTable[x].back()->getKey() == k){
 	  hashTable[x].back()->setValue(v);
    }

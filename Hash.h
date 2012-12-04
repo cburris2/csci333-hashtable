@@ -18,7 +18,7 @@ class Hash{
      vector<Entry<T>* >* hashTable;     
 
     public:
-     Hash(string key, T v);
+     Hash(T v);
      T find(string key);
      void insert(string k, T v);
      void remove(string k);
