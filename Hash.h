@@ -5,23 +5,28 @@
 #include <string>
 #include <vector>
 
+using std::string;
+using std::vector;
+
+template <typename T>
 
 class Hash{
     
     private:
-     String k;
+     string k;
      T value;
-     Vector<Entry<T>* >* hashTable[349];     
+     vector<Entry<T>* >* hashTable;     
 
     public:
-     T find(T v);
-     void insert(String k, T v);
-     void remove(String k, T v);
-     int hashFunction(String key); 
+     Hash(string key, T v);
+     T find(string key);
+     void insert(string k, T v);
+     void remove(string k);
+     int hashFunction(string key); 
 
 
 
-}
+};
 #endif
 
 
