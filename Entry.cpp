@@ -4,11 +4,9 @@
 using std::string;
 
 template <typename T>
-Entry<T>::Entry(string k, T v){
-	      
-	  t = k;
-	  value = v;
-
+Entry<T>::Entry(string k, T v){	      
+    t = k;
+    value = v;
 }
 
 template <typename T>

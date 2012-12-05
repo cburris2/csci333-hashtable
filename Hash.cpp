@@ -2,34 +2,59 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
+#include <list>
 
 using std::string;
 using std::vector;
 using std::cout;
 using std::endl;
-
+using std::list;
 
 template <typename T>
-Hash<T>::Hash(T v ){
+Hash<T>::Hash(){
 
-	  value = v;
-	  hashTable = new vector<Entry<T>* >[349];
+	  //value = v;    			/* default value */ 
+	  hashSize = 349;			/* size of the table */
+	  hashTable = new list<Entry<T>* >[hashSize];	/* entry */
 
+/*
+	  for(int i=0; i < hashSize; i++) {
+		    hashTable.push_back(entry);
+
+	  }
+*/
 }
 
+template <typename T>
+Hash<T>::~Hash(){
+
+    delete [] hashTable;
+}
+/*
 template <typename T>
 T Hash<T>::find(string k){
     
     int x = 0;
-    x = hashFunction(k);
-    vector<Entry<T>* > valueToFind = hashTable[x];
-    
+
+    x = hashFunction(k);  */  /* get the value for the key */
+  /*  if(!hashTable[x].empty()){ 
+    // vector< vector<Entry<T>* > > hashTable;     
+    typename vector<Entry<T>* >::iterator it;  
+    for(it=hashTable[x].begin(); it!=hashTable[x].end(); it++){ 
      
-	  while(!valueToFind.empty()){
+		
+		if((*it)->getKey() == k){ 
+ 
+			return (*it)->getValue();
+		}
+
+	  }
+    }
+	  while(!valueToFind.empty()){ 
+
 		if(valueToFind.back()->getKey() == k){
  
-		return valueToFind.front()->getValue();
+			return valueToFind.back()->getValue();
 		}
     
 		valueToFind.pop_back();
@@ -37,20 +62,27 @@ T Hash<T>::find(string k){
      
 
 		return value;
-}
+}*/
 
 template <typename T>
 void Hash<T>::insert(string k, T v){
      
-   int x = 0;
+    int x = hashFunction(k);
+    
+    Entry<T>* temp = new Entry<T>(k,v);
+    
+    
+    typename list<Entry<T>* >::iterator it;  
+    
+    for(it=hashTable[x].begin(); it!=hashTable[x].end(); it++){ 
 
-   x = hashFunction(k);
-
-   if(hashTable[x].back()->getKey() == k){
-	  hashTable[x].back()->setValue(v);
-   }
-
-   hashTable[x].push_back(new Entry<T>(k,v)); 
+	  if((*it)->getKey() == k){
+		 (*it)->setValue(v);
+		 return;
+	  }
+    
+    }
+    hashTable[x].push_back(temp); 
     
 }
 
@@ -60,13 +92,13 @@ void Hash<T>::remove(string k){
     int h = 0;
     h = hashFunction(k);
     
-    hashTable[h].push_back(new Entry<T>(k, value));
+    //hashTable[h].push_back(Entry<T>(k, value));
 
 }
 
 template <typename T>
 int Hash<T>::hashFunction(string k){
-	  int hashSize = k.size();
+	  int hashLen = k.size();
 	  int hash,sum = 0;
 	 
 
@@ -78,7 +110,7 @@ int Hash<T>::hashFunction(string k){
 	  }	
     
     
-	  hash = sum % hashSize;
+	  hash = sum % hashLen;
     
 	  cout << "hash:" << hash << endl;
     
@@ -87,6 +119,5 @@ int Hash<T>::hashFunction(string k){
 
 
 template class Hash<int>;
-template class Hash<double>;
-template class Hash<string>;
-
+//template class Hash<double>;
+//template class Hash<string>;

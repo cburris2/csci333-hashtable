@@ -4,21 +4,22 @@
 #include "Entry.h"
 #include <string>
 #include <vector>
-
+#include <list>
 using std::string;
 using std::vector;
+using std::list;
 
 template <typename T>
-
 class Hash{
     
     private:
-     string k;
      T value;
-     vector<Entry<T>* >* hashTable;     
+     list<Entry<T>* >* hashTable;     
+     int hashSize;
 
     public:
-     Hash(T v);
+     Hash();
+     ~Hash();
      T find(string key);
      void insert(string k, T v);
      void remove(string k);
@@ -28,6 +29,3 @@ class Hash{
 
 };
 #endif
-
-
-

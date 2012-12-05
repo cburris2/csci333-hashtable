@@ -6,16 +6,13 @@
 using std::string;
 
 template <typename T>
-
 class Entry {
 
-    private:
-    
+    private:    
       string t;
       T value;
 	  
     public:
-
       Entry(string k, T v);
       string getKey();
       T getValue();

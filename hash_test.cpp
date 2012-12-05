@@ -1,5 +1,4 @@
 #include "Hash.h"
-
 #include <iostream>
 
 using std::cout;
@@ -7,20 +6,17 @@ using std::endl;
 
 int main(){
 
+    Hash<int>* h = new Hash<int>();
+    cout << "started " << endl;
+    h->insert("n", 10);
 
+    cout << "inserted " << endl;
+//    cout << h->find(0) << endl;
+    //cout << h->find("nub") << endl;
 
-Hash<int>* h = new Hash<int>(0);
+    //h->remove("nub");
 
-
-//h->insert("n", 10);
-
-cout << h->find("nub") << endl;
-//cout << h->find("nub") << endl;
-
-//h->remove("nub");
-
-
-
+    delete h;
 
 return 0;
 
