@@ -66,10 +66,10 @@ void Hash<T>::insert(string k, T v){
 			   return;
 
 
-		    }
-	  }
+		    } //end if
+	  }//end for
     
-	  hashTable[h].push_back(temp);
+	  hashTable[h].push_back(temp); 
 }
 template <typename T> 
 void Hash<T>::remove(string k){
