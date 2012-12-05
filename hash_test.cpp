@@ -6,17 +6,35 @@ using std::endl;
 
 int main(){
 
-    Hash<int>* h = new Hash<int>();
-    cout << "started " << endl;
-    h->insert("n", 10);
+    Hash<int>* h = new Hash<int>(0);
+    h->insert("n", 5);
 
-    cout << "inserted " << endl;
-//    cout << h->find(0) << endl;
-    //cout << h->find("nub") << endl;
+    h->insert("o", 7);
+    cout << h->find("o") << endl;
+    cout << "o ^ " << endl;
+ //   h->remove("n");
 
-    //h->remove("nub");
-
+    cout << "find n : " << h->find("n") << endl;
+    
+    
     delete h;
+
+
+
+/*    Hash<double>* dh = new Hash<double>(1.2);
+    dh->insert("data", 10);
+
+    cout << dh->find("data") << endl;
+
+    dh->remove("data");
+
+    cout << dh->find("data") << endl;
+    
+    
+    delete dh;
+
+*/
+
 
 return 0;
 

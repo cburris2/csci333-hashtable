@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <list>
+
+
 using std::string;
 using std::vector;
 using std::list;
@@ -16,9 +18,10 @@ class Hash{
      T value;
      list<Entry<T>* >* hashTable;     
      int hashSize;
+     list<Entry<T>* >* tempHash;     
 
     public:
-     Hash();
+     Hash(T v);
      ~Hash();
      T find(string key);
      void insert(string k, T v);
