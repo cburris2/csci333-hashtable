@@ -12,35 +12,37 @@ using std::list;
 
 template <typename T>
 Hash<T>::Hash(T v){
-	  value = v;
-	  hashTable = new list<Entry<T>* >[349];
+	  value = v;  /* default value */  
+	  hashTable = new list<Entry<T>* >[349]; /* initialize the Table */
 
 }
 
 template <typename T>
 Hash<T>::~Hash(){
-    delete [] hashTable;
+    delete [] hashTable;  /* remove the Table */
 
 }
 
 template <typename T>
 T Hash<T>::find(string k){
 		
-	  int h = hashFunction(k);
-        tempHash = new list<Entry<T>* >[349];     
-	  while(!hashTable[h].empty()){
+	  int h = hashFunction(k);    		/* hash the string */
+        
+	  typename list<Entry<T>* >::iterator it; 
 
-    tempHash[h].front()->setValue(hashTable[h].front()->getValue()); 
+	  if(!hashTable[h].empty()){
 
-		    if(hashTable[h].front()->getKey() == k){
+		for(it=hashTable[h].begin();it!=hashTable[h].end(); it++){
+		   
 
-			  return hashTable[h].front()->getValue();
+		   if((*it)->getKey() == k){ 		/* get the key */
+
+			  return (*it)->getValue(); 	/* get the value */
 		    }//end if
+	  
+		}//end for
 
-            hashTable[h].pop_front();
 	  }//end if
-             
-		tempHash = hashTable;
             
 		return value;
 }
@@ -51,14 +53,21 @@ void Hash<T>::insert(string k, T v){
 	  Entry<T>* temp = new Entry<T>(k,v);
     
 	  
-		    if(hashTable[h].front()->getKey() == k){
+	  typename list<Entry<T>* >::iterator it;
 
+	  for(it=hashTable[h].begin();it!=hashTable[h].end(); it++){
+		   
 
-			   hashTable[h].front()->setValue(v);
+		   if((*it)->getKey() == k){
+
 			   
-		    }//end if
+			   (*it)->setValue(v);
+
+			   return;
 
 
+		    }
+	  }
     
 	  hashTable[h].push_back(temp);
 }
@@ -75,13 +84,13 @@ int Hash<T>::hashFunction(string k){
 
 	  for(int i=0; i < (int) k.size(); i++){
     	  
-		cout<<(int) k[i] << endl;
-	
-		sum += (int) k[i];
+		cout<<(int) k[i] << endl;   
+
+		sum += (int) k[i];	   
 	  }	
     
     
-	  hash = sum % hashLen;
+	  hash = sum % hashLen;        
     
 	  cout << "hash:" << hash << endl;
     
